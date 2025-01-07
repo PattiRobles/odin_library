@@ -1,0 +1,11 @@
+/* add media queries */
+* {
+  font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+
+h1 {
+background-color: rgb(40, 128, 80);
+color: white;
+padding: 20px;
+
+}
