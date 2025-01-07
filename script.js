@@ -65,7 +65,7 @@ function openBookCard(index) {
   setTimeout(() => {
     overlay.style.opacity = 1;
     bookCard.style.opacity = 1;
-  }, 10) //delay to allow for changes
+  }, 100) //delay to allow for changes
 }
 
 //close book card
