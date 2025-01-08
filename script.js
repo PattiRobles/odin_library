@@ -1,10 +1,7 @@
 // TO DOs  
-// populate card with info
 // add edit and remove buttons to card
 // add book button
 // css at the end
-
-
 
 const myLibrary = [];
 
@@ -19,12 +16,12 @@ function Book (title, author, pages, read) {
   }
 }
 
-//function to add to library
 function addBookToLibrary (title, author, pages, read) {
   const book = new Book (title, author, pages, read);
   myLibrary.push(book);
 }
 
+//dummy data
 addBookToLibrary('The Hobbit', 'JRR Tolkien', 295, false)
 addBookToLibrary('Cracking the Coding Interview', 'G McDowell', 977, false)
 addBookToLibrary('Hamnet', 'M O\'Farrell', 372, true)
@@ -34,13 +31,10 @@ console.log(myLibrary)
 
 const libraryListing = document.querySelector('#list-container');
 
-//loop to display library content
-//INDEX available in forEach needs to be passed as parameter to 1) create unique IDs 2) avoid scoping issues
+//INDEX in forEach passed as parameter to 1) create unique IDs 2) avoid scoping issues
 myLibrary.forEach((book, index) => 
    insertEntry(book, index))
   
-
-//function to add array books into screen
 function insertEntry (book, index) {
   let libraryEntry = document.createElement('div');
   libraryEntry.classList.add('new-entry');
@@ -56,18 +50,19 @@ function insertEntry (book, index) {
   let bookCard = document.createElement('div');
   bookCard.setAttribute('id', `bookCard${index + 1}`)
   bookCard.classList.add('bookCard');
-  bookCard.textContent = 'card';
+  // bookCard.textContent = 'card';
   libraryListing.appendChild(bookCard)
 
   libraryEntry.addEventListener('click', () => openBookCard(index))
 }
 
-//open book card
 function openBookCard(index) {
   const overlay = document.getElementById(`overlay${index + 1}`);
   const bookCard = document.getElementById(`bookCard${index + 1}`);
   overlay.style.display = 'block';
   bookCard.style.display = 'block';
+
+  overlay.addEventListener('click', () => closeBookCard(index));
 
   //avoid duplicates
   if (!bookCard.dataset.loaded) {
@@ -92,7 +87,6 @@ function openBookCard(index) {
   }, 50) //delay to allow for changes
 }
 
-//close book card
 function closeBookCard(index) {
   const overlay = document.getElementById(`overlay${index + 1}`);
   const bookCard = document.getElementById(`bookCard${index + 1}`);
@@ -106,10 +100,6 @@ function closeBookCard(index) {
   }, 200) //delay to allow for changes
 }
 
-//click on overlay closes card - should also add 'x' button
-document.querySelectorAll('.overlay').forEach((overlay, index) => {
-  overlay.addEventListener('click', () => closeBookCard(index));
-});
 
 // const closeButton = document.getElementById('closeCardButton');
 // closeButton.addEventListener('click', () => closeBookCard(index))
