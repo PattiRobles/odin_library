@@ -70,9 +70,9 @@ function openBookCard(index) {
   const cardContent = template.content.cloneNode(true);
 
   cardContent.querySelector('.book-title').textContent = myLibrary[index].title
-  cardContent.querySelector('.book-author').textContent = myLibrary[index].author
-  cardContent.querySelector('.book-pages').textContent = myLibrary[index].pages
-  cardContent.querySelector('.book-read').textContent = myLibrary[index].read
+  cardContent.querySelector('.book-author').textContent = 'Author: ' + myLibrary[index].author
+  cardContent.querySelector('.book-pages').textContent = 'Pages: ' + myLibrary[index].pages
+  cardContent.querySelector('.book-read').textContent = 'Read?: ' + (myLibrary[index].read === true? 'Yes' : 'No')
   
 
   bookCard.appendChild(cardContent);
