@@ -1,3 +1,11 @@
+// TO DOs  
+// populate card with info
+// add edit and remove buttons to card
+// add book button
+// css at the end
+
+
+
 const myLibrary = [];
 
 //constructor
@@ -48,7 +56,7 @@ function insertEntry (book, index) {
   let bookCard = document.createElement('div');
   bookCard.setAttribute('id', `bookCard${index + 1}`)
   bookCard.classList.add('bookCard');
-  bookCard.textContent = 'card';
+  //bookCard.textContent = 'card';
   libraryListing.appendChild(bookCard)
 
   libraryEntry.addEventListener('click', () => openBookCard(index))
@@ -61,11 +69,16 @@ function openBookCard(index) {
   overlay.style.display = 'block';
   bookCard.style.display = 'block';
 
+  const template = document.getElementById('bookCardTemplate');
+  const cardContent = template.content.cloneNode(true);
+
+  bookCard.appendChild(cardContent);
+
   //fade in overlay and card
   setTimeout(() => {
     overlay.style.opacity = 1;
     bookCard.style.opacity = 1;
-  }, 100) //delay to allow for changes
+  }, 50) //delay to allow for changes
 }
 
 //close book card
@@ -84,6 +97,7 @@ function closeBookCard(index) {
 
 }
 
+//click on overlay closes card - should also add 'x' button
 document.querySelectorAll('.overlay').forEach((overlay, index) => {
   overlay.addEventListener('click', () => closeBookCard(index));
 });

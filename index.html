@@ -11,7 +11,15 @@
 <body>
   <h1>Library</h1>
   <div class="list-container" id="list-container">
-    <!-- add books -->
+    <!-- template tag hides from view until explicity added with JS // use template.content.cloneNode(true) to copy all template's content -->
+     <template id="bookCardTemplate">
+      <div class="book-card">
+        <h2 class="book-title">title</h2>
+        <p class="book-author">author</p>
+        <p class="book-pages">pages</p>
+        <p class="book-read">read?</p>
+      </div>
+     </template>
   </div>
 
   <script src="script.js"></script>
