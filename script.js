@@ -1,5 +1,5 @@
 // TO DOs  
-// add edit and remove buttons to card
+// edit button to card
 // add book button
 // css at the end
 
@@ -73,8 +73,13 @@ function openBookCard(index) {
   cardContent.querySelector('.book-author').textContent = myLibrary[index].author
   cardContent.querySelector('.book-pages').textContent = myLibrary[index].pages
   cardContent.querySelector('.book-read').textContent = myLibrary[index].read
+  
 
   bookCard.appendChild(cardContent);
+
+  //using bookCard rather than document, we use non unique ID as selector and will always refer to the 1st ID in the doc. using bookcard changes
+  const closeButton = bookCard.querySelector('.close-card-button');
+  closeButton.addEventListener('click', () => closeBookCard(index))
 
   //bit of code that avoids same card duplication
   bookCard.dataset.loaded = 'true'
@@ -97,16 +102,8 @@ function closeBookCard(index) {
   setTimeout(() => {
     overlay.style.display = 'none';
     bookCard.style.display = 'none';
-  }, 200) //delay to allow for changes
+  }, 200) 
 }
 
-
-// const closeButton = document.getElementById('closeCardButton');
-// closeButton.addEventListener('click', () => closeBookCard(index))
- 
-
-
-//populate card
-//fade rest of screen - cant manage to fix overlay
 
 //REMOVE HIDDEN CLASS TO SIMPLIFY AND MANAGE DISPLAY OF CARD WITH OPACITY AND DISPLAY
