@@ -56,7 +56,7 @@ function insertEntry (book, index) {
   let bookCard = document.createElement('div');
   bookCard.setAttribute('id', `bookCard${index + 1}`)
   bookCard.classList.add('bookCard');
-  //bookCard.textContent = 'card';
+  bookCard.textContent = 'card';
   libraryListing.appendChild(bookCard)
 
   libraryEntry.addEventListener('click', () => openBookCard(index))
@@ -69,10 +69,21 @@ function openBookCard(index) {
   overlay.style.display = 'block';
   bookCard.style.display = 'block';
 
+  //avoid duplicates
+  if (!bookCard.dataset.loaded) {
   const template = document.getElementById('bookCardTemplate');
   const cardContent = template.content.cloneNode(true);
 
+  cardContent.querySelector('.book-title').textContent = myLibrary[index].title
+  cardContent.querySelector('.book-author').textContent = myLibrary[index].author
+  cardContent.querySelector('.book-pages').textContent = myLibrary[index].pages
+  cardContent.querySelector('.book-read').textContent = myLibrary[index].read
+
   bookCard.appendChild(cardContent);
+
+  //bit of code that avoids same card duplication
+  bookCard.dataset.loaded = 'true'
+  }
 
   //fade in overlay and card
   setTimeout(() => {
@@ -87,20 +98,21 @@ function closeBookCard(index) {
   const bookCard = document.getElementById(`bookCard${index + 1}`);
   overlay.style.opacity = 0;
   bookCard.style.opacity = 0;
-  //why not display none??
-
+  
   //delay to allow fade and then hide
   setTimeout(() => {
     overlay.style.display = 'none';
     bookCard.style.display = 'none';
   }, 200) //delay to allow for changes
-
 }
 
 //click on overlay closes card - should also add 'x' button
 document.querySelectorAll('.overlay').forEach((overlay, index) => {
   overlay.addEventListener('click', () => closeBookCard(index));
 });
+
+// const closeButton = document.getElementById('closeCardButton');
+// closeButton.addEventListener('click', () => closeBookCard(index))
  
 
 
