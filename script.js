@@ -1,9 +1,14 @@
 // TO DOs  
 // edit button to card
-// add book button
 // css at the end
 
 const myLibrary = [];
+
+//dummy data
+addBookToLibrary('The Hobbit', 'JRR Tolkien', 295, false)
+addBookToLibrary('Cracking the Coding Interview', 'G McDowell', 977, false)
+addBookToLibrary('Hamnet', 'M O\'Farrell', 372, true)
+addBookToLibrary('El Arte de No Amargarse la Vida ', 'R Santandreu', 368, true)
 
 //constructor
 function Book (title, author, pages, read) {
@@ -21,19 +26,10 @@ function addBookToLibrary (title, author, pages, read) {
   myLibrary.push(book);
 }
 
-//dummy data
-addBookToLibrary('The Hobbit', 'JRR Tolkien', 295, false)
-addBookToLibrary('Cracking the Coding Interview', 'G McDowell', 977, false)
-addBookToLibrary('Hamnet', 'M O\'Farrell', 372, true)
-addBookToLibrary('El Arte de No Amargarse la Vida ', 'R Santandreu', 368, true)
-
-console.log(myLibrary)
-
 const libraryListing = document.querySelector('#list-container');
-
+myLibrary.forEach((book, index) => insertEntry(book, index))
 //INDEX in forEach passed as parameter to 1) create unique IDs 2) avoid scoping issues
-myLibrary.forEach((book, index) => 
-   insertEntry(book, index))
+
   
 function insertEntry (book, index) {
   let libraryEntry = document.createElement('div');
@@ -44,13 +40,12 @@ function insertEntry (book, index) {
   let overlay = document.createElement('div');
   overlay.setAttribute('id', `overlay${index + 1}`)
   overlay.classList.add('overlay');
-  overlay.textContent = 'overlay';
+  //overlay.textContent = 'overlay';
   libraryListing.appendChild(overlay)
 
   let bookCard = document.createElement('div');
   bookCard.setAttribute('id', `bookCard${index + 1}`)
   bookCard.classList.add('bookCard');
-  // bookCard.textContent = 'card';
   libraryListing.appendChild(bookCard)
 
   libraryEntry.addEventListener('click', () => openBookCard(index))
@@ -105,13 +100,22 @@ function closeBookCard(index) {
   }, 200) 
 }
 
-document.querySelector('.add-book-button').addEventListener('click', () => {
-openForm()}
-)
+document.querySelector('.add-book-button').addEventListener('click', () => openNewBookForm())
 
-function openForm() {
+function openNewBookForm() {
   form.parentElement.style.display = 'block';
+
+  let areaOverlay = document.createElement('div');
+  areaOverlay.setAttribute('id', `areaOverlay`)
+  areaOverlay.classList.add('area-overlay');
+  //overlay.textContent = 'overlay';
+  header.appendChild(areaOverlay)
 }
+
+function closeNewBookForm() {
+  form.parentElement.style.display = 'none'
+  form.reset();
+ }
 
 const form = document.querySelector('#newBookForm');//select form rather than div container otherwise no access to info
 
@@ -127,10 +131,9 @@ form.addEventListener('submit', (e) => {
 
   insertEntry(myLibrary[myLibrary.length-1], myLibrary.length-1)
 
-  closeForm();
+  closeNewBookForm();
 })
 
-function closeForm() {
- form.parentElement.style.display = 'none'
- form.reset();
-}
+
+
+
