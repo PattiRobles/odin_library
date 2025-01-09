@@ -105,14 +105,32 @@ function closeBookCard(index) {
   }, 200) 
 }
 
-document.querySelector('.add-book-button').addEventListener('click', () =>
-openForm())
+document.querySelector('.add-book-button').addEventListener('click', () => {
+openForm()}
+)
 
 function openForm() {
-  const form = document.querySelector('.form-container');
-  form.style.display = 'block';
-  
+  form.parentElement.style.display = 'block';
 }
 
+const form = document.querySelector('#newBookForm');//select form rather than div container otherwise no access to info
 
-//REMOVE HIDDEN CLASS TO SIMPLIFY AND MANAGE DISPLAY OF CARD WITH OPACITY AND DISPLAY
+form.addEventListener('submit', (e) => {
+   e.preventDefault(); //stop page reload
+
+  const title = form.querySelector('input[name="title"]').value;
+  const author = form.querySelector('input[name="author"]').value;
+  const pages = form.querySelector('input[name="pages"]').value;
+  const read = form.querySelector('input[name="read"]').value;
+
+  addBookToLibrary(title, author, pages, read);
+
+  insertEntry(myLibrary[myLibrary.length-1], myLibrary.length-1)
+
+  form.reset();
+  closeForm();
+})
+
+function closeForm() {
+ form.parentElement.style.display = 'none'
+}
