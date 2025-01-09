@@ -102,19 +102,18 @@ function closeBookCard(index) {
 
 document.querySelector('.add-book-button').addEventListener('click', () => openNewBookForm())
 
+let areaOverlay = document.createElement('div');
 function openNewBookForm() {
   form.parentElement.style.display = 'block';
-
-  let areaOverlay = document.createElement('div');
   areaOverlay.setAttribute('id', `areaOverlay`)
   areaOverlay.classList.add('area-overlay');
-  //overlay.textContent = 'overlay';
   header.appendChild(areaOverlay)
 }
 
 function closeNewBookForm() {
   form.parentElement.style.display = 'none'
   form.reset();
+  areaOverlay.classList.remove('area-overlay');
  }
 
 const form = document.querySelector('#newBookForm');//select form rather than div container otherwise no access to info
@@ -125,7 +124,8 @@ form.addEventListener('submit', (e) => {
   const title = form.querySelector('input[name="title"]').value;
   const author = form.querySelector('input[name="author"]').value;
   const pages = form.querySelector('input[name="pages"]').value;
-  const read = form.querySelector('input[name="read"]').value;
+  const read = form.querySelector('input[name="read"]').checked
+  console.log(read)
 
   addBookToLibrary(title, author, pages, read);
 
