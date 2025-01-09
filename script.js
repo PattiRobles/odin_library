@@ -127,10 +127,10 @@ form.addEventListener('submit', (e) => {
 
   insertEntry(myLibrary[myLibrary.length-1], myLibrary.length-1)
 
-  form.reset();
   closeForm();
 })
 
 function closeForm() {
  form.parentElement.style.display = 'none'
+ form.reset();
 }
