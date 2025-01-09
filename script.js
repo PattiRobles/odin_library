@@ -81,7 +81,7 @@ function openBookCard(index) {
   const closeButton = bookCard.querySelector('.close-card-button');
   closeButton.addEventListener('click', () => closeBookCard(index))
 
-  //bit of code that avoids same card duplication
+  //bit of code that avoids same card duplication, sets data-loaded in html dynamically
   bookCard.dataset.loaded = 'true'
   }
 
@@ -103,6 +103,15 @@ function closeBookCard(index) {
     overlay.style.display = 'none';
     bookCard.style.display = 'none';
   }, 200) 
+}
+
+document.querySelector('.add-book-button').addEventListener('click', () =>
+openForm())
+
+function openForm() {
+  const form = document.querySelector('.form-container');
+  form.style.display = 'block';
+  
 }
 
 
