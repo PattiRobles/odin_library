@@ -49,6 +49,30 @@ function insertEntry (book, index) {
   libraryListing.appendChild(bookCard)
 
   libraryEntry.addEventListener('click', () => openBookCard(index))
+
+  const deleteBookButton = document.createElement('button');
+  deleteBookButton.textContent = 'Delete book'
+  deleteBookButton.classList.add('delete-book-button');
+ deleteBookButton.dataset.index = index;
+libraryEntry.appendChild(deleteBookButton)
+  deleteBookButton.addEventListener('click', (e) => {
+    const buttonClickedIndex = e.target.dataset.index;
+    console.log(buttonClickedIndex)
+    // const bookToRemove = buttonClicked.closest('.new-entry');
+    // console.log(bookToRemove)
+    // bookToRemove.remove();
+    updateLibrary(buttonClickedIndex)
+  })
+
+  function rerenderLibrary () {
+    libraryListing.innerHTML = '';
+    myLibrary.forEach((book, index) => insertEntry(book, index))
+  }
+
+  function updateLibrary (index) {
+    myLibrary.splice(index,1);  
+    rerenderLibrary();
+  }
 }
 
 function openBookCard(index) {
@@ -125,7 +149,6 @@ form.addEventListener('submit', (e) => {
   const author = form.querySelector('input[name="author"]').value;
   const pages = form.querySelector('input[name="pages"]').value;
   const read = form.querySelector('input[name="read"]').checked
-  console.log(read)
 
   addBookToLibrary(title, author, pages, read);
 
@@ -134,6 +157,11 @@ form.addEventListener('submit', (e) => {
   closeNewBookForm();
 })
 
+
+//BUGS
+//after deleting one entry, hover pink doesn't work if youy click somewhere
+//also, book cards dont open
+//delete button deletes 1st elem of array
 
 
 

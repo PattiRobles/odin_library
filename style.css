@@ -23,8 +23,10 @@ padding: 20px;
 
 .new-entry {
   padding: 20px;
-  margin-bottom: 10px;
   background-color: rgba(40, 128, 80, 0.3);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 .new-entry:hover {
@@ -62,7 +64,6 @@ padding: 20px;
 .add-book-button {
   padding: 15px;
   margin-bottom: 10px;
-
 }
 
 .form-container {
@@ -86,5 +87,9 @@ padding: 20px;
   /* background: rgba(0, 0, 0, 0.5); */
   backdrop-filter:blur(2.5px);
   z-index: 10;
+}
+
+.delete-book-button {
+  background-color: rgb(163, 223, 190)
 }
 
